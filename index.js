@@ -31,6 +31,8 @@ function clickDisLike2(){
 }  
 btnDisLike2.addEventListener("click",clickDisLike2)
 
+
+
 const submit = document.getElementById("submit")
 
 const comment = document.getElementById("comment")
