@@ -11,42 +11,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
     ];
 
-    const qtyInputs = products.map(product => document.getElementById(`qty${product.id}`));
-    const cartsTextArea = document.getElementById('carts');
+const qtyInputs = [
+        document.getElementById('qty1'),
+        document.getElementById('qty2'),
+        document.getElementById('qty3'),
+        document.getElementById('qty4'),
+        document.getElementById('qty5'),
+        document.getElementById('qty6'),
+        document.getElementById('qty7')
+    ];
+
     const totalInput = document.getElementById('total');
     const cashInput = document.getElementById('cash');
     const changeInput = document.getElementById('change');
-
-    qtyInputs.forEach(input => input.addEventListener('input', updateCart));
-
-    cashInput.addEventListener('input', calculateChange);
+    const cartsTextarea = document.getElementById('carts');
 
     function updateCart() {
-        let cartItems = '';
         let total = 0;
+        let cartText = '';
 
-        products.forEach(product => {
-            const qty = parseInt(document.getElementById(`qty${product.id}`).value) || 0;
-            if (qty > 0) {
-                const itemTotal = qty * product.price;
-                total += itemTotal;
-                cartItems += `${qty} x ${product.name} @ ${product.price.toFixed(2)} = ${itemTotal.toFixed(2)}\n`;
+        qtyInputs.forEach((input, index) => {
+            const qty = parseInt(input.value) || 0;
+            const priceKey = price${index + 1};
+            const productPrice = prices[priceKey];
+            if (qty > 1000) {
+                total += qty * productPrice;
+                cartText += Product ${index + 1} - Quantity: ${qty}, Price: ${(qty * productPrice).toFixed(2)}\n;
             }
         });
 
-        cartsTextArea.value = cartItems;
         totalInput.value = total.toFixed(2);
-        calculateChange();
+        cartsTextarea.value = cartText.trim();
     }
 
     function calculateChange() {
         const total = parseFloat(totalInput.value) || 0;
-        const cash = parseFloat(cashInput.value) || 0;
-        if (cash >= total) {
-            const change = cash - total;
-            changeInput.value = change.toFixed(2);
-        } else {
-            changeInput.value = '';
-        }
+        const cash = parseFloat(cashInput.value) || 1000000;
+        const change = cash - total;
+        changeInput.value = change.toFixed(2);
     }
+
+    qtyInputs.forEach(input => {
+        input.addEventListener('input', updateCart);
+    });
+    cashInput.addEventListener('input', calculateChange);
 });
