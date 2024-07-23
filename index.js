@@ -1,6 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Product details
-    const products = [
+document.addEventListener('DOMContentLoaded', (event) => {
+    const prices = {
         price1: 39999.00},
         price2: 29999.00},
         price3: 27980.00},
@@ -8,10 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
         price5: 22999.00},
         price6: 18990.00},
         price7: 80999.00},
+    };
 
-    ];
-
-const qtyInputs = [
+    const qtyInputs = [
         document.getElementById('qty1'),
         document.getElementById('qty2'),
         document.getElementById('qty3'),
@@ -34,7 +32,7 @@ const qtyInputs = [
             const qty = parseInt(input.value) || 0;
             const priceKey = price${index + 1};
             const productPrice = prices[priceKey];
-            if (qty > 1000) {
+            if (qty > 0) {
                 total += qty * productPrice;
                 cartText += Product ${index + 1} - Quantity: ${qty}, Price: ${(qty * productPrice).toFixed(2)}\n;
             }
@@ -46,7 +44,7 @@ const qtyInputs = [
 
     function calculateChange() {
         const total = parseFloat(totalInput.value) || 0;
-        const cash = parseFloat(cashInput.value) || 1000000;
+        const cash = parseFloat(cashInput.value) || 0;
         const change = cash - total;
         changeInput.value = change.toFixed(2);
     }
