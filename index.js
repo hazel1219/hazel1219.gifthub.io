@@ -1,57 +1,52 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Product details
+    const products = [
+        price1: 39999.00},
+        price2: 29999.00},
+        price3: 27980.00},
+        price4: 42999.00},
+        price5: 22999.00},
+        price6: 18990.00},
+        price7: 80999.00},
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    const prices = {
-        price1: 39999.00,
-        price2: 29999.00,
-        price3: 27980.00,
-        price4: 42999.00,
-        price5: 22999.00,
-        price6: 18990.00,
-        price7: 80999.00
-    };
-
-    const qtyInputs = [
-        document.getElementById('qty1'),
-        document.getElementById('qty2'),
-        document.getElementById('qty3'),
-        document.getElementById('qty4'),
-        document.getElementById('qty5'),
-        document.getElementById('qty6'),
-        document.getElementById('qty7')
     ];
 
+    const qtyInputs = products.map(product => document.getElementById(`qty${product.id}`));
+    const cartsTextArea = document.getElementById('carts');
     const totalInput = document.getElementById('total');
     const cashInput = document.getElementById('cash');
     const changeInput = document.getElementById('change');
-    const cartsTextarea = document.getElementById('carts');
+
+    qtyInputs.forEach(input => input.addEventListener('input', updateCart));
+
+    cashInput.addEventListener('input', calculateChange);
 
     function updateCart() {
+        let cartItems = '';
         let total = 0;
-        let cartText = '';
 
-        qtyInputs.forEach((input, index) => {
-            const qty = parseInt(input.value) || 0;
-            const priceKey = price${index + 1};
-            const productPrice = prices[priceKey];
+        products.forEach(product => {
+            const qty = parseInt(document.getElementById(`qty${product.id}`).value) || 0;
             if (qty > 0) {
-                total += qty * productPrice;
-                cartText += Product ${index + 1} - Quantity: ${qty}, Price: ${(qty * productPrice).toFixed(2)}\n;
+                const itemTotal = qty * product.price;
+                total += itemTotal;
+                cartItems += `${qty} x ${product.name} @ ${product.price.toFixed(2)} = ${itemTotal.toFixed(2)}\n`;
             }
         });
 
+        cartsTextArea.value = cartItems;
         totalInput.value = total.toFixed(2);
-        cartsTextarea.value = cartText.trim();
+        calculateChange();
     }
 
     function calculateChange() {
         const total = parseFloat(totalInput.value) || 0;
         const cash = parseFloat(cashInput.value) || 0;
-        const change = cash - total;
-        changeInput.value = change.toFixed(2);
+        if (cash >= total) {
+            const change = cash - total;
+            changeInput.value = change.toFixed(2);
+        } else {
+            changeInput.value = '';
+        }
     }
-
-    qtyInputs.forEach(input => {
-        input.addEventListener('input', updateCart);
-    });
-    cashInput.addEventListener('input', calculateChange);
 });
