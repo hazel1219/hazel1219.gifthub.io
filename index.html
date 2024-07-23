@@ -36,14 +36,14 @@
     <div class="col-4 text-center">
       <label id="product3">Samsung</label>
       <img src="images (1).jpg" style="width:200px; height:300px;" class="img-thumbnail"/>
-      <label for="product3" id="price3">: 27980.00</label>
+      <label for="product3" id="price3">27980.00</label>
       <input type="number" class="form-control" id="qty3" placeholder="Enter quantity"/>
     </div>
 
     <div class="col-4 text-center">
       <label id="product4">Acer</label>
       <img src="71RtdZ+xi4L._AC_SL1500_.jpg" style="width:200px; height:300px;" class="img-thumbnail"/>
-      <label for="product4" id="price4">:42999.00</label>
+      <label for="product4" id="price4">42999.00</label>
       <input type="number" class="form-control" id="qty4" placeholder="Enter quantity"/>
     </div>
 
@@ -77,10 +77,21 @@
       <input type="text" class="form-control border-0" id="total" readonly placeholder="Total"/>
       <input type="number" class="form-control" id="cash" placeholder="Cash Tendered"/>
       <input type="text" class="form-control border-0" id="change" readonly placeholder="Change"/>
+      <button type="button" onclick="calculateChange()">Calculate Change</button>
     </div>
   </div>
-</div>
-<script src="app.js"></script>
-
+	
+   <script>
+        function calculateChange() {
+            var total = parseFloat(document.getElementById('total').value);
+            var cash = parseFloat(document.getElementById('cash').value);
+            if (!isNaN(total) && !isNaN(cash) && cash >= total) {
+                var change = cash - total;
+                document.getElementById('change').value = change.toFixed(2);
+            } else {
+                document.getElementById('change').value = "Insufficient cash";
+            }
+        }
+    </script>
 </body>
 </html>
