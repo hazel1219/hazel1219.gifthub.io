@@ -69,16 +69,29 @@
     </div>
 
   
-
-	<div class="col-4">
-      <label for="carts">Orders</label>
-      <textarea class="form-control" rows="29" id="carts" cols="200" readonly style="width:250px; height:200px; font-size:12px;"></textarea>
-      <input type="text" class="form-control border-0" id="total" readonly placeholder="Total"/>
-      <input type="number" class="form-control" id="cash" placeholder="Cash Tendered"/>
-      <input type="text" class="form-control border-0" id="change" readonly placeholder="Change"/>
+<div class="container">
+        <h2>Order and Payment</h2>
+        <div class="col-4">
+            <label for="carts">Orders</label>
+            <textarea class="form-control" rows="29" id="carts" cols="200" readonly style="width:250px; height:200px; font-size:12px;"></textarea>
+            <input type="text" class="form-control border-0" id="total" readonly placeholder="Total"/>
+            <input type="number" class="form-control" id="cash" placeholder="Cash Tendered"/>
+            <input type="text" class="form-control border-0" id="change" readonly placeholder="Change"/>
+            <button type="button" onclick="calculateChange()">Calculate Change</button>
+        </div>
     </div>
-  </div>
-</div>
-<script src="app.js"></script>
+
+    <script>
+        function calculateChange() {
+            var total = parseFloat(document.getElementById('total').value);
+            var cash = parseFloat(document.getElementById('cash').value);
+            if (!isNaN(total) && !isNaN(cash) && cash >= total) {
+                var change = cash - total;
+                document.getElementById('change').value = change.toFixed(2);
+            } else {
+                document.getElementById('change').value = "Insufficient cash";
+            }
+        }
+    </script>
 </body>
 </html>
