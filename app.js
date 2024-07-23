@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Product details
     const products = [
-        price1: 39999.00,
-        price2: 29999.00,
-        price3: 27980.00,
-        price4: 42999.00,
-        price5: 22999.00,
-        price6: 18990.00,
-        price7: 80999.00
+        {id: 1, name: 'Infinix Hot40Pro', price: 39999.00},
+        {id: 2, name: 'Infinix Smart8', price: 29999.00},
+        {id: 3, name: 'Samsung S21', price: 27980.00},
+        {id: 4, name: 'Samsung S22', price: 42999.00},
+        {id: 5, name: 'iPhone 12', price: 22999.00},
+        {id: 6, name: 'iPhone 13', price: 18990.00},
+        {id: 7, name: 'iPhone 14', price: 80999.00}
 
     ];
 
