@@ -80,18 +80,12 @@
       <button type="button" onclick="calculateChange()">Calculate Change</button>
     </div>
   </div>
-	
-   <script>
-        function calculateChange() {
-            var total = parseFloat(document.getElementById('total').value);
-            var cash = parseFloat(document.getElementById('cash').value);
-            if (!isNaN(total) && !isNaN(cash) && cash >= total) {
-                var change = cash - total;
-                document.getElementById('change').value = change.toFixed(2);
-            } else {
-                document.getElementById('change').value = "1000000 cash";
-            }
-        }
-    </script>
+</div>
+<script src="app.js"></script>
+
 </body>
 </html>
+	    
+
+ 
+
